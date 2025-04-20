@@ -1,0 +1,14 @@
+{
+	"name": "Button",
+	"type": "registry:component",
+	"registryDependencies": ["button"],
+	"dependencies": ["zod-auto-form", "class-variance-authority"],
+	"files": [
+		{
+			"type": "registry:ui",
+			"content": "import { Button } from \"@/components/ui/button\";\r\nimport { Loader2 } from \"lucide-react\";\r\nimport type { SubmitButton } from \"zod-auto-form\";\r\nexport default function AutoFormButton({\r\n\tchildren,\r\n\tformId,\r\n\tisLoading,\r\n\tonClick,\r\n}: SubmitButton) {\r\n\treturn (\r\n\t\t<Button type=\"submit\" form={formId} disabled={isLoading} onClick={onClick}>\r\n\t\t\t{isLoading ? <Loader2 className=\"mr-2 h-4 w-4 animate-spin\" /> : children}\r\n\t\t</Button>\r\n\t);\r\n}\r\n",
+			"path": "ui/auto-form/button.tsx",
+			"target": "components/ui/auto-form/button.tsx"
+		}
+	]
+}

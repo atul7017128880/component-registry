@@ -2,7 +2,7 @@ import type { Registry } from "./schema";
 
 const registryComponents: Registry = [
 	{
-		name: "Auto Form Component",
+		name: "auto-form-component",
 		type: "registry:block",
 		registryDependencies: [
 			"button",
@@ -20,6 +20,7 @@ const registryComponents: Registry = [
 			"badge",
 			"command",
 			"drawer",
+			"sidebar",
 		],
 		dependencies: ["zod-auto-form"],
 		files: [

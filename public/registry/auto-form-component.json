@@ -1,5 +1,5 @@
 {
-  "name": "Auto Form Component",
+  "name": "auto-form-component",
   "type": "registry:block",
   "registryDependencies": [
     "button",
@@ -16,7 +16,8 @@
     "calendar",
     "badge",
     "command",
-    "drawer"
+    "drawer",
+    "sidebar"
   ],
   "dependencies": [
     "zod-auto-form"

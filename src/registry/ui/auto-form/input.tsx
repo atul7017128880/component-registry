@@ -16,7 +16,6 @@ export default function AutoFormInput({
 	title,
 	value,
 }: TextInput) {
-	console.log(errorMessages);
 	return (
 		<FieldWarper
 			title={title || label}

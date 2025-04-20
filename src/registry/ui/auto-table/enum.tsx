@@ -32,7 +32,6 @@ export const pickColorBasedOnValue = (value: string): string => {
 export default function AutoTableComponentEnum({
 	value,
 }: TableEnumComponentType) {
-	console.log(value);
 	return (
 		<Badge
 			style={{ backgroundColor: pickColorBasedOnValue(value) }}

@@ -1,50 +1,123 @@
-import { useState } from "react";
-import viteLogo from "/vite.svg";
-import reactLogo from "./assets/react.svg";
-import "./App.css";
-import { z } from "zod";
 import {
-	AutoForm,
-	AutoFormComponentsProvider,
-	ComponentRegistry,
-} from "zod-auto-form";
-import AutoFormArrayWrapper from "./registry/ui/auto-form/AutoFormArrayWrapper";
-import AutoFormGroupedFieldsWrapper from "./registry/ui/auto-form/AutoFormGroupedFieldsWrapper";
-import AutoFormObjectWrapper from "./registry/ui/auto-form/AutoFormObjectWrapper";
-import AutoFormButton from "./registry/ui/auto-form/button";
-import AutoFormCheckboxV1 from "./registry/ui/auto-form/checkbox_ui_1";
-import AutoFormCheckboxV2 from "./registry/ui/auto-form/checkbox_ui_2";
-import AutoFormDateTimePicker from "./registry/ui/auto-form/date-time-picker";
-import AutoFormComponent from "./registry/ui/auto-form/form";
-import AutoFormInput from "./registry/ui/auto-form/input";
-import AutoFormMultiSelect from "./registry/ui/auto-form/multi-select";
-import AutoFormNumberInput from "./registry/ui/auto-form/number-input";
-import AutoFormRadioGroup from "./registry/ui/auto-form/radio-group";
-import AutoFormSelect from "./registry/ui/auto-form/select";
-import AutoFormSwitch from "./registry/ui/auto-form/switch";
-import AutoFormTextArea from "./registry/ui/auto-form/textarea";
-const componentRegistry = ComponentRegistry({
-	Input: AutoFormInput,
-	SubmitButton: AutoFormButton,
-	Form: AutoFormComponent,
-	NumberInput: AutoFormNumberInput,
-	Select: AutoFormSelect,
-	TextArea: AutoFormTextArea,
-	MultiSelect: AutoFormMultiSelect,
-	Checkbox: AutoFormCheckboxV2,
-	RadioGroup: AutoFormRadioGroup,
-	Switch: AutoFormSwitch,
-	DateTimePicker: AutoFormDateTimePicker,
-	ObjectWrapper: AutoFormObjectWrapper,
-	ArrayWrapper: AutoFormArrayWrapper,
-	GroupedFieldsWrapper: AutoFormGroupedFieldsWrapper,
-});
-function App() {
-	const [count, setCount] = useState(0);
+	AutoTableComponentsProvider,
+	ComponentRegistryHelper,
+	FieldCustomizer,
+	RawAutoTable,
+} from "raw-auto-table-zod";
+import { z } from "zod";
+import "./App.css";
+import AutoTableComponentAvatar from "./registry/ui/auto-table/avatar";
+import AutoTableComponentBoolean from "./registry/ui/auto-table/boolean";
+import AutoTableComponentDate from "./registry/ui/auto-table/date";
+import AutoTableComponentEnum from "./registry/ui/auto-table/enum";
+import AutoTableComponentFullTableLoading from "./registry/ui/auto-table/full-table-loading";
+import AutoTableComponentMultiBoolean from "./registry/ui/auto-table/multi-boolean";
+import AutoTableComponentMultiDate from "./registry/ui/auto-table/multi-date";
+import AutoTableComponentMultiEnum from "./registry/ui/auto-table/multi-enum";
+import AutoTableComponentMultiNumber from "./registry/ui/auto-table/multi-number";
+import AutoTableComponentMultiString from "./registry/ui/auto-table/multi-string";
+import AutoTableComponentNumber from "./registry/ui/auto-table/number";
+import AutoTableComponentRowBasedLoading from "./registry/ui/auto-table/row-based-loading";
+import {
+	AutoTableComponentTable,
+	AutoTableComponentTableBody,
+	AutoTableComponentTableCell,
+	AutoTableComponentTableHead,
+	AutoTableComponentTableHeader,
+	AutoTableComponentTableRow,
+} from "./registry/ui/auto-table/table";
+import AutoTableComponentText from "./registry/ui/auto-table/text";
 
+const schema = z.object({
+	profile: z
+		.string()
+		.url()
+		.describe(
+			FieldCustomizer({
+				isImage: true,
+			}),
+		),
+	id: z.string(),
+	name: z.string(),
+	email: z.string(),
+	age: z.number(),
+	role: z.enum(["admin", "user", "guest"]),
+	skills: z.array(z.enum(["react", "node", "express", "mongodb"])),
+	array: z.array(z.string()),
+	date: z.date(),
+	multiDate: z.array(z.date()),
+	isBanned: z.boolean(),
+});
+const randomDataGenerator = (length: number) => {
+	const array: z.infer<typeof schema>[] = [];
+	for (let i = 0; i < length; i++) {
+		const skills = ["react", "node", "express", "mongodb"];
+		const randomSkills = skills.sort(() => Math.random() - 0.5).slice(0, 2);
+		array.push({
+			profile: `https://i.pravatar.cc/150?img=${i}`,
+			id: `id-${i}`,
+			name: `name-${i}`,
+			email: `email-${i}@gmail.com`,
+			age: i,
+			role: Math.random() > 0.5 ? "admin" : "user",
+			skills: randomSkills,
+			array: ["1", "2", "3", "4", "5"],
+			date: new Date(),
+			multiDate: [new Date(), new Date(), new Date()],
+			isBanned: Math.random() > 0.5,
+		});
+	}
+	return array;
+};
+const componentRegistry = ComponentRegistryHelper({
+	Table: AutoTableComponentTable,
+	TableTBody: AutoTableComponentTableBody,
+	TableTD: AutoTableComponentTableCell,
+	TableTH: AutoTableComponentTableHead,
+	TableTHead: AutoTableComponentTableHeader,
+	TableTR: AutoTableComponentTableRow,
+	image: AutoTableComponentAvatar,
+	text: AutoTableComponentText,
+	number: AutoTableComponentNumber,
+	enum: AutoTableComponentEnum,
+	date: AutoTableComponentDate,
+	boolean: AutoTableComponentBoolean,
+	FullTableLoading: AutoTableComponentFullTableLoading,
+	multi_boolean: AutoTableComponentMultiBoolean,
+	multi_date: AutoTableComponentMultiDate,
+	multi_enum: AutoTableComponentMultiEnum,
+	multi_number: AutoTableComponentMultiNumber,
+	multi_string: AutoTableComponentMultiString,
+	RowBasedLoading: AutoTableComponentRowBasedLoading,
+});
+// const componentRegistry = ComponentRegistry({
+// 	Input: AutoFormInput,
+// 	SubmitButton: AutoFormButton,
+// 	Form: AutoFormComponent,
+// 	NumberInput: AutoFormNumberInput,
+// 	Select: AutoFormSelect,
+// 	TextArea: AutoFormTextArea,
+// 	MultiSelect: AutoFormMultiSelect,
+// 	Checkbox: AutoFormCheckboxV2,
+// 	RadioGroup: AutoFormRadioGroup,
+// 	Switch: AutoFormSwitch,
+// 	DateTimePicker: AutoFormDateTimePicker,
+// 	ObjectWrapper: AutoFormObjectWrapper,
+// 	ArrayWrapper: AutoFormArrayWrapper,
+// 	GroupedFieldsWrapper: AutoFormGroupedFieldsWrapper,
+// });
+function App() {
 	return (
 		<div className="flex flex-col gap-4 w-[80%] mx-auto mt-29 mb-40">
-			<AutoFormComponentsProvider components={componentRegistry}>
+			<AutoTableComponentsProvider components={componentRegistry}>
+				<RawAutoTable
+					isLoading
+					loadingType="row-based"
+					data={randomDataGenerator(10)}
+					schema={schema}
+				/>
+			</AutoTableComponentsProvider>
+			{/* <AutoFormComponentsProvider components={componentRegistry}>
 				<AutoForm
 					onSubmit={(data) => {
 						console.log(data);
@@ -133,7 +206,7 @@ function App() {
 						},
 					}}
 				/>
-			</AutoFormComponentsProvider>
+			</AutoFormComponentsProvider> */}
 		</div>
 	);
 }

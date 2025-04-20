@@ -1,0 +1,106 @@
+{
+  "name": "auto-table-component",
+  "type": "registry:block",
+  "registryDependencies": [
+    "avatar",
+    "skeleton",
+    "badge",
+    "table"
+  ],
+  "dependencies": [
+    "raw-auto-table-zod",
+    "date-fns"
+  ],
+  "files": [
+    {
+      "type": "registry:ui",
+      "content": "import { ComponentRegistryHelper } from \"raw-auto-table-zod\";\r\nimport AutoTableComponentAvatar from \"./avatar\";\r\nimport AutoTableComponentBoolean from \"./boolean\";\r\nimport AutoTableComponentDate from \"./date\";\r\nimport AutoTableComponentEnum from \"./enum\";\r\nimport AutoTableComponentFullTableLoading from \"./full-table-loading\";\r\nimport AutoTableComponentMultiBoolean from \"./multi-boolean\";\r\nimport AutoTableComponentMultiDate from \"./multi-date\";\r\nimport AutoTableComponentMultiEnum from \"./multi-enum\";\r\nimport AutoTableComponentMultiNumber from \"./multi-number\";\r\nimport AutoTableComponentMultiString from \"./multi-string\";\r\nimport AutoTableComponentNumber from \"./number\";\r\nimport AutoTableComponentRowBasedLoading from \"./row-based-loading\";\r\nimport {\r\n\tAutoTableComponentTable,\r\n\tAutoTableComponentTableBody,\r\n\tAutoTableComponentTableCell,\r\n\tAutoTableComponentTableHead,\r\n\tAutoTableComponentTableHeader,\r\n\tAutoTableComponentTableRow,\r\n} from \"./table\";\r\nimport AutoTableComponentText from \"./text\";\r\n\r\nconst AutoTableRegistryComponents = ComponentRegistryHelper({\r\n\tTable: AutoTableComponentTable,\r\n\tTableTBody: AutoTableComponentTableBody,\r\n\tTableTD: AutoTableComponentTableCell,\r\n\tTableTH: AutoTableComponentTableHead,\r\n\tTableTHead: AutoTableComponentTableHeader,\r\n\tTableTR: AutoTableComponentTableRow,\r\n\timage: AutoTableComponentAvatar,\r\n\ttext: AutoTableComponentText,\r\n\tnumber: AutoTableComponentNumber,\r\n\tenum: AutoTableComponentEnum,\r\n\tdate: AutoTableComponentDate,\r\n\tboolean: AutoTableComponentBoolean,\r\n\tFullTableLoading: AutoTableComponentFullTableLoading,\r\n\tmulti_boolean: AutoTableComponentMultiBoolean,\r\n\tmulti_date: AutoTableComponentMultiDate,\r\n\tmulti_enum: AutoTableComponentMultiEnum,\r\n\tmulti_number: AutoTableComponentMultiNumber,\r\n\tmulti_string: AutoTableComponentMultiString,\r\n\tRowBasedLoading: AutoTableComponentRowBasedLoading,\r\n});\r\n\r\nexport default AutoTableRegistryComponents;\r\n",
+      "path": "ui/auto-table/index.tsx",
+      "target": "components/ui/auto-table/index.tsx"
+    },
+    {
+      "type": "registry:ui",
+      "content": "import {\r\n\tTableBody,\r\n\tTableCell,\r\n\tTableHead,\r\n\tTableHeader,\r\n\tTableRow,\r\n\tTable as TaleOfShad,\r\n} from \"@/components/ui/table\";\r\nimport type {\r\n\tTableType,\r\n\tTable_TBody_Type,\r\n\tTable_TD_Type,\r\n\tTable_TH_Type,\r\n\tTable_THead_Type,\r\n\tTable_TR_Type,\r\n} from \"raw-auto-table-zod\";\r\nexport function AutoTableComponentTable({ children }: TableType) {\r\n\treturn <TaleOfShad>{children}</TaleOfShad>;\r\n}\r\nexport function AutoTableComponentTableBody({ children }: Table_TBody_Type) {\r\n\treturn <TableBody>{children}</TableBody>;\r\n}\r\nexport function AutoTableComponentTableCell({ children }: Table_TD_Type) {\r\n\treturn <TableCell>{children}</TableCell>;\r\n}\r\nexport function AutoTableComponentTableHead({ children }: Table_TH_Type) {\r\n\treturn (\r\n\t\t<TableHead className=\"bg-primary text-primary-foreground\">\r\n\t\t\t{children}\r\n\t\t</TableHead>\r\n\t);\r\n}\r\nexport function AutoTableComponentTableHeader({ children }: Table_THead_Type) {\r\n\treturn <TableHeader className=\"bg-primary h-15\">{children}</TableHeader>;\r\n}\r\nexport function AutoTableComponentTableRow({ children }: Table_TR_Type) {\r\n\treturn <TableRow>{children}</TableRow>;\r\n}\r\n",
+      "path": "ui/auto-table/table.tsx",
+      "target": "components/ui/auto-table/table.tsx"
+    },
+    {
+      "type": "registry:ui",
+      "content": "import { Skeleton } from \"@/components/ui/skeleton\";\r\nimport type { RowBasedLoadingComponentType } from \"raw-auto-table-zod\";\r\n\r\nexport default function AutoTableComponentRowBasedLoading(\r\n\t// Using any type for now until proper typing is available\r\n\tprops: RowBasedLoadingComponentType,\r\n) {\r\n\t// Default to 4 columns if not specified\r\n\r\n\treturn <Skeleton className=\"h-5 w-full\" />;\r\n}\r\n",
+      "path": "ui/auto-table/row-based-loading.tsx",
+      "target": "components/ui/auto-table/row-based-loading.tsx"
+    },
+    {
+      "type": "registry:ui",
+      "content": "import { Loader2 } from \"lucide-react\";\r\nimport type { FullTableLoadingComponentType } from \"raw-auto-table-zod\";\r\n\r\nexport default function AutoTableComponentFullTableLoading(\r\n\t// eslint-disable-next-line @typescript-eslint/no-unused-vars\r\n\t_props: FullTableLoadingComponentType,\r\n) {\r\n\treturn (\r\n\t\t<div className=\"flex min-h-[200px] w-full items-center justify-center\">\r\n\t\t\t<Loader2 className=\"h-8 w-8 animate-spin text-primary\" />\r\n\t\t</div>\r\n\t);\r\n}\r\n",
+      "path": "ui/auto-table/full-table-loading.tsx",
+      "target": "components/ui/auto-table/full-table-loading.tsx"
+    },
+    {
+      "type": "registry:ui",
+      "content": "import { Avatar, AvatarImage } from \"@/components/ui/avatar\";\r\nimport type { TableImageComponentType } from \"raw-auto-table-zod\";\r\n\r\nexport default function AutoTableComponentAvatar({\r\n\tvalue,\r\n}: TableImageComponentType) {\r\n\treturn (\r\n\t\t<Avatar>\r\n\t\t\t<AvatarImage className=\"rounded-full\" src={value} />\r\n\t\t</Avatar>\r\n\t);\r\n}\r\n",
+      "path": "ui/auto-table/avatar.tsx",
+      "target": "components/ui/auto-table/avatar.tsx"
+    },
+    {
+      "type": "registry:ui",
+      "content": "import type { TableTextComponentType } from \"raw-auto-table-zod\";\r\n\r\nexport default function AutoTableComponentText({\r\n\tvalue,\r\n}: TableTextComponentType) {\r\n\treturn <span className=\"text-foreground\">{value}</span>;\r\n}\r\n",
+      "path": "ui/auto-table/text.tsx",
+      "target": "components/ui/auto-table/text.tsx"
+    },
+    {
+      "type": "registry:ui",
+      "content": "import type { TableNumberComponentType } from \"raw-auto-table-zod\";\r\n\r\nexport default function AutoTableComponentNumber({\r\n\tvalue,\r\n}: TableNumberComponentType) {\r\n\treturn <span className=\"font-mono text-foreground\">{value}</span>;\r\n}\r\n",
+      "path": "ui/auto-table/number.tsx",
+      "target": "components/ui/auto-table/number.tsx"
+    },
+    {
+      "type": "registry:ui",
+      "content": "import { Badge } from \"@/components/ui/badge\";\r\nimport type { TableEnumComponentType } from \"raw-auto-table-zod\";\r\nconst colorPalette = [\r\n\t\"#FF6B6B\", // Vibrant Coral Red\r\n\t\"#6BCB77\", // Soft Green\r\n\t\"#4D96FF\", // Sky Blue\r\n\t\"#F5B971\", // Warm Apricot\r\n\t\"#A66DD4\", // Lavender Purple\r\n\t\"#00C2A8\", // Turquoise\r\n\t\"#FFD166\", // Golden Yellow\r\n\t\"#F67280\", // Rose Pink\r\n\t\"#3A86FF\", // Bright Indigo\r\n\t\"#8D99AE\", // Slate Grey-Blue\r\n\t\"#F28482\", // Blush\r\n\t\"#118AB2\", // Ocean Blue\r\n\t\"#06D6A0\", // Mint Green\r\n\t\"#F94144\", // Strawberry Red\r\n];\r\n\r\nconst stringToColorIndex = (value: string, paletteLength: number): number => {\r\n\tlet hash = 0;\r\n\tfor (let i = 0; i < value.length; i++) {\r\n\t\thash = value.charCodeAt(i) + ((hash << 5) - hash);\r\n\t}\r\n\treturn Math.abs(hash) % paletteLength;\r\n};\r\n\r\nexport const pickColorBasedOnValue = (value: string): string => {\r\n\tconst index = stringToColorIndex(value.toLowerCase(), colorPalette.length);\r\n\treturn colorPalette[index];\r\n};\r\nexport default function AutoTableComponentEnum({\r\n\tvalue,\r\n}: TableEnumComponentType) {\r\n\tconsole.log(value);\r\n\treturn (\r\n\t\t<Badge\r\n\t\t\tstyle={{ backgroundColor: pickColorBasedOnValue(value) }}\r\n\t\t\tclassName=\"capitalize\"\r\n\t\t>\r\n\t\t\t{value}\r\n\t\t</Badge>\r\n\t);\r\n}\r\n",
+      "path": "ui/auto-table/enum.tsx",
+      "target": "components/ui/auto-table/enum.tsx"
+    },
+    {
+      "type": "registry:ui",
+      "content": "import { format } from \"date-fns\";\r\nimport type { TableDateComponentType } from \"raw-auto-table-zod\";\r\n\r\nexport default function AutoTableComponentDate({\r\n\tvalue,\r\n}: TableDateComponentType) {\r\n\tconst date = new Date(value);\r\n\treturn (\r\n\t\t<span className=\"text-muted-foreground\">\r\n\t\t\t{format(date, \"MMM dd, yyyy hh:mm a\")}\r\n\t\t</span>\r\n\t);\r\n}\r\n",
+      "path": "ui/auto-table/date.tsx",
+      "target": "components/ui/auto-table/date.tsx"
+    },
+    {
+      "type": "registry:ui",
+      "content": "import { Check, X } from \"lucide-react\";\r\nimport type { TableBooleanComponentType } from \"raw-auto-table-zod\";\r\n\r\nexport default function AutoTableComponentBoolean({\r\n\tvalue,\r\n}: TableBooleanComponentType) {\r\n\treturn value ? (\r\n\t\t<Check className=\"h-4 w-4 text-green-500\" />\r\n\t) : (\r\n\t\t<X className=\"h-4 w-4 text-red-500\" />\r\n\t);\r\n}\r\n",
+      "path": "ui/auto-table/boolean.tsx",
+      "target": "components/ui/auto-table/boolean.tsx"
+    },
+    {
+      "type": "registry:ui",
+      "content": "import { Check, X } from \"lucide-react\";\r\nimport type { TableMultiBooleanComponentType } from \"raw-auto-table-zod\";\r\n\r\nexport default function AutoTableComponentMultiBoolean({\r\n\tvalue,\r\n}: TableMultiBooleanComponentType) {\r\n\treturn (\r\n\t\t<div className=\"flex flex-wrap gap-1\">\r\n\t\t\t{value.map((item, index) => (\r\n\t\t\t\t<span key={`bool-${index}-${item}`} className=\"flex items-center\">\r\n\t\t\t\t\t{item ? (\r\n\t\t\t\t\t\t<Check className=\"h-4 w-4 text-green-500\" />\r\n\t\t\t\t\t) : (\r\n\t\t\t\t\t\t<X className=\"h-4 w-4 text-red-500\" />\r\n\t\t\t\t\t)}\r\n\t\t\t\t</span>\r\n\t\t\t))}\r\n\t\t</div>\r\n\t);\r\n}\r\n",
+      "path": "ui/auto-table/multi-boolean.tsx",
+      "target": "components/ui/auto-table/multi-boolean.tsx"
+    },
+    {
+      "type": "registry:ui",
+      "content": "import { format } from \"date-fns\";\r\nimport type { TableMultiDateComponentType } from \"raw-auto-table-zod\";\r\n\r\nexport default function AutoTableComponentMultiDate({\r\n\tvalue,\r\n}: TableMultiDateComponentType) {\r\n\treturn (\r\n\t\t<div className=\"flex flex-row gap-1\">\r\n\t\t\t{value.map((item, index) => (\r\n\t\t\t\t<div key={`date-${index}-${item}`}>\r\n\t\t\t\t\t<span className=\"text-foreground text-sm\">\r\n\t\t\t\t\t\t{format(item, \"MMM dd, yyyy hh:mm a\")}\r\n\t\t\t\t\t</span>\r\n\t\t\t\t\t{index !== value.length - 1 && (\r\n\t\t\t\t\t\t<span className=\"text-foreground text-sm\">,</span>\r\n\t\t\t\t\t)}\r\n\t\t\t\t</div>\r\n\t\t\t))}\r\n\t\t</div>\r\n\t);\r\n}\r\n",
+      "path": "ui/auto-table/multi-date.tsx",
+      "target": "components/ui/auto-table/multi-date.tsx"
+    },
+    {
+      "type": "registry:ui",
+      "content": "import { Badge } from \"@/components/ui/badge\";\r\nimport type { TableMultiEnumComponentType } from \"raw-auto-table-zod\";\r\nimport { pickColorBasedOnValue } from \"./enum\";\r\n\r\nexport default function AutoTableComponentMultiEnum({\r\n\tvalue,\r\n}: TableMultiEnumComponentType) {\r\n\treturn (\r\n\t\t<div className=\"flex flex-wrap gap-1\">\r\n\t\t\t{value.map((item, index) => (\r\n\t\t\t\t<Badge\r\n\t\t\t\t\tkey={`enum-${index}-${item}`}\r\n\t\t\t\t\tstyle={{ backgroundColor: pickColorBasedOnValue(item) }}\r\n\t\t\t\t\tclassName=\"capitalize\"\r\n\t\t\t\t>\r\n\t\t\t\t\t{item}\r\n\t\t\t\t</Badge>\r\n\t\t\t))}\r\n\t\t</div>\r\n\t);\r\n}\r\n",
+      "path": "ui/auto-table/multi-enum.tsx",
+      "target": "components/ui/auto-table/multi-enum.tsx"
+    },
+    {
+      "type": "registry:ui",
+      "content": "import type { TableMultiNumberComponentType } from \"raw-auto-table-zod\";\r\n\r\nexport default function AutoTableComponentMultiNumber({\r\n\tvalue,\r\n}: TableMultiNumberComponentType) {\r\n\treturn (\r\n\t\t<div className=\"flex flex-row gap-1\">\r\n\t\t\t{value.map((item, index) => (\r\n\t\t\t\t<div key={`string-${index}-${item}`}>\r\n\t\t\t\t\t<span className=\"text-foreground text-sm\">{item}</span>\r\n\t\t\t\t\t{index !== value.length - 1 && (\r\n\t\t\t\t\t\t<span className=\"text-foreground text-sm\">,</span>\r\n\t\t\t\t\t)}\r\n\t\t\t\t</div>\r\n\t\t\t))}\r\n\t\t</div>\r\n\t);\r\n}\r\n",
+      "path": "ui/auto-table/multi-number.tsx",
+      "target": "components/ui/auto-table/multi-number.tsx"
+    },
+    {
+      "type": "registry:ui",
+      "content": "import type { TableMultiStringComponentType } from \"raw-auto-table-zod\";\r\n\r\nexport default function AutoTableComponentMultiString({\r\n\tvalue,\r\n}: TableMultiStringComponentType) {\r\n\treturn (\r\n\t\t<div className=\"flex flex-row gap-1\">\r\n\t\t\t{value.map((item, index) => (\r\n\t\t\t\t<div key={`string-${index}-${item}`}>\r\n\t\t\t\t\t<span className=\"text-foreground text-sm\">{item}</span>\r\n\t\t\t\t\t{index !== value.length - 1 && (\r\n\t\t\t\t\t\t<span className=\"text-foreground text-sm\">,</span>\r\n\t\t\t\t\t)}\r\n\t\t\t\t</div>\r\n\t\t\t))}\r\n\t\t</div>\r\n\t);\r\n}\r\n",
+      "path": "ui/auto-table/multi-string.tsx",
+      "target": "components/ui/auto-table/multi-string.tsx"
+    }
+  ]
+}

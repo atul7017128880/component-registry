@@ -45,6 +45,29 @@ const registryComponents: Registry = [
 			"ui/auto-form/index.tsx",
 		],
 	},
+	{
+		name: "auto-table-component",
+		type: "registry:block",
+		registryDependencies: ["avatar", "skeleton", "badge", "table"],
+		dependencies: ["raw-auto-table-zod", "date-fns"],
+		files: [
+			"ui/auto-table/index.tsx",
+			"ui/auto-table/table.tsx",
+			"ui/auto-table/row-based-loading.tsx",
+			"ui/auto-table/full-table-loading.tsx",
+			"ui/auto-table/avatar.tsx",
+			"ui/auto-table/text.tsx",
+			"ui/auto-table/number.tsx",
+			"ui/auto-table/enum.tsx",
+			"ui/auto-table/date.tsx",
+			"ui/auto-table/boolean.tsx",
+			"ui/auto-table/multi-boolean.tsx",
+			"ui/auto-table/multi-date.tsx",
+			"ui/auto-table/multi-enum.tsx",
+			"ui/auto-table/multi-number.tsx",
+			"ui/auto-table/multi-string.tsx",
+		],
+	},
 ];
 
 export { registryComponents };

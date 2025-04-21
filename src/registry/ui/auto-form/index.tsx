@@ -1,4 +1,5 @@
 import { ComponentRegistry } from "zod-auto-form";
+import AutoFormArrayInputFieldWrapper from "./AutoFormArrayInputFieldWrapper";
 import AutoFormArrayWrapper from "./AutoFormArrayWrapper";
 import AutoFormGroupedFieldsWrapper from "./AutoFormGroupedFieldsWrapper";
 import AutoFormObjectWrapper from "./AutoFormObjectWrapper";
@@ -29,6 +30,11 @@ const componentRegistry = ComponentRegistry({
 	ObjectWrapper: AutoFormObjectWrapper,
 	ArrayWrapper: AutoFormArrayWrapper,
 	GroupedFieldsWrapper: AutoFormGroupedFieldsWrapper,
+	ArrayInputFieldWrapper: AutoFormArrayInputFieldWrapper,
+	arrayBoolean: AutoFormCheckboxV1,
+	arrayDate: AutoFormDateTimePicker,
+	arrayNumber: AutoFormNumberInput,
+	arrayString: AutoFormInput,
 });
 
 export default componentRegistry;

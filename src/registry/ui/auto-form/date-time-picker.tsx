@@ -38,7 +38,7 @@ export default function AutoFormDateTimePicker({
 }: DateTimeInput) {
 	const [isOpenMobile, setIsOpenMobile] = React.useState(false);
 	const [isPopoverOpen, setIsPopoverOpen] = React.useState(false);
-    
+
 	const [selectedTime, setSelectedTime] = React.useState<{
 		hours: number;
 		minutes: number;
@@ -55,9 +55,6 @@ export default function AutoFormDateTimePicker({
 			newDate.setHours(selectedTime.hours);
 			newDate.setMinutes(selectedTime.minutes);
 			setDate(newDate);
-		} else {
-			// @ts-ignore
-			setDate(undefined);
 		}
 	};
 
@@ -107,10 +104,12 @@ export default function AutoFormDateTimePicker({
 				className={cn(
 					"w-full justify-start text-left font-normal ",
 					!date && "text-muted-foreground",
-                    isError && "border-red-500"
+					isError && "border-red-500",
 				)}
 			>
-				<CalendarClock className={cn("mr-2 h-4 w-4", isError && "text-red-500")} />
+				<CalendarClock
+					className={cn("mr-2 h-4 w-4", isError && "text-red-500")}
+				/>
 				{date ? format(date, "PP p") : <span>{placeholder}</span>}
 			</Button>
 		</FieldWarper>
@@ -139,7 +138,7 @@ export default function AutoFormDateTimePicker({
 
 	return (
 		<Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
-			<PopoverTrigger >{triggerButtonContent}</PopoverTrigger>
+			<PopoverTrigger>{triggerButtonContent}</PopoverTrigger>
 			<PopoverContent className="w-auto p-0" align="start">
 				<DateTimeContent />
 			</PopoverContent>

@@ -43,6 +43,7 @@ const registryComponents: Registry = [
 			"ui/auto-form/base-multi-select.tsx",
 			"ui/auto-form/base-time-picker.tsx",
 			"ui/auto-form/index.tsx",
+			"ui/auto-form/AutoFormArrayInputFieldWrapper.tsx",
 		],
 	},
 	{

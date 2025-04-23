@@ -1,54 +1,85 @@
-# React + TypeScript + Vite
+# Auto-Thing Shadcn Component Registry
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repository contains custom components built on top of [shadcn/ui](https://ui.shadcn.com/) that you can easily add to your project.
 
-Currently, two official plugins are available:
+## Available Components
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **auto-thing-component**: A versatile component for creating dynamic content
+- **auto-table-component**: A customizable data table component
+- **side-bar-component**: A responsive sidebar navigation component
+- **auto-form-component**: A form generation component with validation
+- **Button**: A customized button component
 
-## Expanding the ESLint configuration
+## Installation
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+You can add these components directly to your project using the shadcn CLI:
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### Using npm
+
+```bash
+# Install auto-thing-component
+npx shadcn@latest add https://raw.githubusercontent.com/atul7017128880/component-registry/refs/heads/master/public/registry/auto-thing-component.json
+
+# Install auto-table-component
+npx shadcn@latest add https://raw.githubusercontent.com/atul7017128880/component-registry/refs/heads/master/public/registry/auto-table-component.json
+
+# Install side-bar-component
+npx shadcn@latest add https://raw.githubusercontent.com/atul7017128880/component-registry/refs/heads/master/public/registry/side-bar-component.json
+
+# Install auto-form-component
+npx shadcn@latest add https://raw.githubusercontent.com/atul7017128880/component-registry/refs/heads/master/public/registry/auto-form-component.json
+
+# Install Button component
+npx shadcn@latest add https://raw.githubusercontent.com/atul7017128880/component-registry/refs/heads/master/public/registry/Button.json
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Using pnpm
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+# Install auto-thing-component
+pnpm dlx shadcn@latest add https://raw.githubusercontent.com/atul7017128880/component-registry/refs/heads/master/public/registry/auto-thing-component.json
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+# Install auto-table-component
+pnpm dlx shadcn@latest add https://raw.githubusercontent.com/atul7017128880/component-registry/refs/heads/master/public/registry/auto-table-component.json
+
+# Install side-bar-component
+pnpm dlx shadcn@latest add https://raw.githubusercontent.com/atul7017128880/component-registry/refs/heads/master/public/registry/side-bar-component.json
+
+# Install auto-form-component
+pnpm dlx shadcn@latest add https://raw.githubusercontent.com/atul7017128880/component-registry/refs/heads/master/public/registry/auto-form-component.json
+
+# Install Button component
+pnpm dlx shadcn@latest add https://raw.githubusercontent.com/atul7017128880/component-registry/refs/heads/master/public/registry/Button.json
 ```
+
+### Using Bun
+
+```bash
+# Install auto-thing-component
+bunx --bun shadcn@latest add https://raw.githubusercontent.com/atul7017128880/component-registry/refs/heads/master/public/registry/auto-thing-component.json
+
+# Install auto-table-component
+bunx --bun shadcn@latest add https://raw.githubusercontent.com/atul7017128880/component-registry/refs/heads/master/public/registry/auto-table-component.json
+
+# Install side-bar-component
+bunx --bun shadcn@latest add https://raw.githubusercontent.com/atul7017128880/component-registry/refs/heads/master/public/registry/side-bar-component.json
+
+# Install auto-form-component
+bunx --bun shadcn@latest add https://raw.githubusercontent.com/atul7017128880/component-registry/refs/heads/master/public/registry/auto-form-component.json
+
+# Install Button component
+bunx --bun shadcn@latest add https://raw.githubusercontent.com/atul7017128880/component-registry/refs/heads/master/public/registry/Button.json
+```
+
+## Requirements
+
+- A project using [shadcn/ui](https://ui.shadcn.com/)
+- Node.js 16.8 or later
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+MIT

@@ -104,6 +104,38 @@ const registryComponents: Registry = [
 			"ui/auto-thing/ResponsiveModal.tsx",
 		],
 	},
+	{
+		name: "side-bar-component",
+		type: "registry:block",
+		registryDependencies: [
+			"separator",
+			"collapsible",
+			"button",
+			"command",
+			"dialog",
+			"dropdown-menu",
+			"tooltip",
+			"avatar",
+			"skeleton",
+			"badge",
+		],
+		dependencies: ["next-themes"],
+		files: [
+			"ui/side-bar/index.tsx",
+			"ui/side-bar/header-theme-toggle.tsx",
+			"ui/side-bar/MainSideBarProvider.tsx",
+			"ui/side-bar/team-switcher.tsx",
+			"ui/side-bar/breadcrumb-nav.tsx",
+			"ui/side-bar/menu-search-modal.tsx",
+			"ui/side-bar/nav-main.tsx",
+			"ui/side-bar/nav-projects.tsx",
+			"ui/side-bar/nav-user.tsx",
+			"ui/side-bar/sidebar.tsx",
+			"ui/side-bar/app-sidebar.tsx",
+			"ui/side-bar/menu-list.tsx",
+			"ui/side-bar/theme-toggle.tsx",
+		],
+	},
 ];
 
 export { registryComponents };

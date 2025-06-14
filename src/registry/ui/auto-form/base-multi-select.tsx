@@ -80,6 +80,11 @@ interface MultiSelectProps
 	defaultValue?: string[];
 
 	/**
+	 * The selected values (controlled usage). If provided, the component is controlled.
+	 */
+	value?: string[];
+
+	/**
 	 * Placeholder text to be displayed when no values are selected.
 	 * Optional, defaults to "Select options".
 	 */
@@ -105,12 +110,6 @@ interface MultiSelectProps
 	modalPopover?: boolean;
 
 	/**
-	 * If true, renders the multi-select component as a child of another component.
-	 * Optional, defaults to false.
-	 */
-	asChild?: boolean;
-
-	/**
 	 * Additional class names to apply custom styles to the multi-select component.
 	 * Optional, can be used to add custom styles.
 	 */
@@ -127,20 +126,28 @@ export const MultiSelect = React.forwardRef<
 			onValueChange,
 			variant,
 			defaultValue = [],
+			value,
 			placeholder = "Select options",
 			animation = 0,
 			maxCount = 3,
 			modalPopover = false,
-			asChild = false,
 			className,
 			...props
 		},
 		ref,
 	) => {
-		const [selectedValues, setSelectedValues] =
-			React.useState<string[]>(defaultValue);
+		const isControlled = value !== undefined;
+		const [internalSelectedValues, setInternalSelectedValues] = React.useState<string[]>(defaultValue);
+		const selectedValues = isControlled ? value! : internalSelectedValues;
 		const [isPopoverOpen, setIsPopoverOpen] = React.useState(false);
 		const [isAnimating, setIsAnimating] = React.useState(false);
+
+		React.useEffect(() => {
+			if (!isControlled && defaultValue) {
+				setInternalSelectedValues(defaultValue);
+			}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+		}, [defaultValue]);
 
 		const handleInputKeyDown = (
 			event: React.KeyboardEvent<HTMLInputElement>,
@@ -150,7 +157,7 @@ export const MultiSelect = React.forwardRef<
 			} else if (event.key === "Backspace" && !event.currentTarget.value) {
 				const newSelectedValues = [...selectedValues];
 				newSelectedValues.pop();
-				setSelectedValues(newSelectedValues);
+				if (!isControlled) setInternalSelectedValues(newSelectedValues);
 				onValueChange(newSelectedValues);
 			}
 		};
@@ -159,12 +166,12 @@ export const MultiSelect = React.forwardRef<
 			const newSelectedValues = selectedValues.includes(option)
 				? selectedValues.filter((value) => value !== option)
 				: [...selectedValues, option];
-			setSelectedValues(newSelectedValues);
+			if (!isControlled) setInternalSelectedValues(newSelectedValues);
 			onValueChange(newSelectedValues);
 		};
 
 		const handleClear = () => {
-			setSelectedValues([]);
+			if (!isControlled) setInternalSelectedValues([]);
 			onValueChange([]);
 		};
 
@@ -174,7 +181,7 @@ export const MultiSelect = React.forwardRef<
 
 		const clearExtraOptions = () => {
 			const newSelectedValues = selectedValues.slice(0, maxCount);
-			setSelectedValues(newSelectedValues);
+			if (!isControlled) setInternalSelectedValues(newSelectedValues);
 			onValueChange(newSelectedValues);
 		};
 
@@ -183,7 +190,7 @@ export const MultiSelect = React.forwardRef<
 				handleClear();
 			} else {
 				const allValues = options.map((option) => option.value);
-				setSelectedValues(allValues);
+				if (!isControlled) setInternalSelectedValues(allValues);
 				onValueChange(allValues);
 			}
 		};

@@ -52,7 +52,7 @@ export default function MainSideBarProvider({
 						</div>
 					</header>
 				</div>
-				<div className="flex flex-1 flex-col gap-4 p-4 pt-2">{children}</div>
+				<div className="fixed mt-15 flex w-full flex-1 flex-col gap-4 p-4 pt-2 ">{children}</div>
 			</SidebarInset>
 			<MenuSearchModal open={searchOpen} onOpenChange={setSearchOpen} />
 		</SidebarProvider>

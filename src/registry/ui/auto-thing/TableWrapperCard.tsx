@@ -14,17 +14,20 @@ export default function AutoThingTableWrapperCard({
 	description,
 	openCreateModal,
 	paginationData,
+	isShowCreateButton = true,
 }: TableWrapperCardType) {
 	return (
-		<Card>
+		<Card className="w-[100%] gap-2 md:w-[85%]">
 			<CardHeader className="flex flex-row justify-between">
 				<div>
 					<CardTitle>{title}</CardTitle>
 					<CardDescription>{description}</CardDescription>
 				</div>
-				<Button size="sm" onClick={openCreateModal} className="mt-2 self-end">
-					Create
-				</Button>
+				{isShowCreateButton && (
+					<Button size="sm" onClick={openCreateModal} className="mt-2 self-end">
+						Create
+					</Button>
+				)}
 			</CardHeader>
 			<CardContent>{children}</CardContent>
 			<CardFooter className="flex flex-row justify-between">

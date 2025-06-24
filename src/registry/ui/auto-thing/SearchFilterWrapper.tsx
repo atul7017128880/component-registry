@@ -16,7 +16,7 @@ export default function AutoThingSearchFilterWrapper({
 	children,
 }: SearchFilterWrapperType) {
 	return (
-		<Card className="flex gap-2">
+		<Card className="flex w-[100%] gap-2 md:w-[85%]">
 			<CardHeader>
 				<CardTitle>Search</CardTitle>
 				<CardDescription>Search Information</CardDescription>
